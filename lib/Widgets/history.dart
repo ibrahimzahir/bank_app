@@ -19,7 +19,7 @@ class History extends StatelessWidget {
           ),
         ),
         ListView.builder(
-          itemCount: 2,
+          itemCount: history.length,
           padding: EdgeInsets.only(left: 16, right: 16),
           shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -87,9 +87,10 @@ class History extends StatelessWidget {
                       )
                     ],
                   ),
+                  Spacer(),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         children: [
