@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Widgets/TransactionsCard.dart';
+import '../models/transactions_model.dart';
 import '../models/card_model.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/color_styles.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // Current selected
+  int current = 0;
+
+  // Handle Indicator
+  List<T> map<T>(List list, Function handler) {
+    List<T> result = [];
+    for (var i = 0; i < list.length; i++) {
+      result.add(handler(i, list[i]));
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +225,7 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: Column(
@@ -231,14 +249,86 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 30),
           Container(
-              height: 120,
-              child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return TransactionsCard();
-                  })),
+            height: 120,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return TransactionsCard(
+                    operations: datas[index].name,
+                    selectedIcon: datas[index].selectedIcon,
+                    unSelectedIcon: datas[index].unSelectedIcon,
+                    isSelected: current == index,
+                    context: this);
+              },
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class TransactionsCard extends StatefulWidget {
+  final String operations;
+  final String selectedIcon;
+  final String unSelectedIcon;
+  final bool isSelected;
+  _HomeScreenState context;
+
+  TransactionsCard(
+      {this.operations,
+      this.selectedIcon,
+      this.unSelectedIcon,
+      this.isSelected,
+      this.context});
+
+  @override
+  _TransactionsCardState createState() => _TransactionsCardState();
+}
+
+class _TransactionsCardState extends State<TransactionsCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16),
+      child: Container(
+        height: 123,
+        width: 123,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          gradient: const LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: <Color>[
+              Color(0xFFEDE7F6),
+              Color(0xFFEDE7F6),
+            ],
+            tileMode: TileMode.repeated, // repeats the gradient over the canvas
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 25),
+          child: Column(
+            children: [
+              SvgPicture.asset(
+                widget.isSelected ? widget.selectedIcon : widget.unSelectedIcon,
+              ),
+              SizedBox(height: 8),
+              Text(
+                widget.operations,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 15,
+                  color: Colors.deepPurple[700],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
