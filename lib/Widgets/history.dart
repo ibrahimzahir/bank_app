@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants/color_styles.dart';
+import '../models/history_model.dart';
 
 class History extends StatelessWidget {
   @override
@@ -12,9 +13,9 @@ class History extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 16, bottom: 20),
           child: Text(
-            'Transaction',
+            'History',
             style: GoogleFonts.inter(
-                fontSize: 18, fontWeight: FontWeight.w700, color: Colors.green),
+                fontSize: 18, fontWeight: FontWeight.w700, color: blackColor),
           ),
         ),
         ListView.builder(
@@ -29,30 +30,34 @@ class History extends StatelessWidget {
               padding:
                   EdgeInsets.only(left: 24, top: 12, bottom: 12, right: 22),
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 10,
-                    spreadRadius: 5,
-                    offset: Offset(8.0, 8.0),
+                    color: Colors.grey[200],
+                    blurRadius: 25.0,
+                    spreadRadius: 5.0,
+                    offset: Offset(
+                      15.0,
+                      15.0,
+                    ),
                   )
                 ],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
+                children: [
                   Row(
-                    children: <Widget>[
+                    children: [
                       Container(
-                        height: 57,
-                        width: 57,
+                        height: 60,
+                        width: 60,
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          // image: DecorationImage(
-                          //   image: AssetImage(transactions[index].photo),
-                          // ),
+                          image: DecorationImage(
+                            image: AssetImage(
+                              history[index].photo,
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -61,36 +66,52 @@ class History extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
+                        children: [
                           Text(
-                            'transactions[index].name',
+                            history[index].name,
                             style: GoogleFonts.inter(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.green),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: blackColor,
+                            ),
                           ),
                           Text(
-                            'transactions[index].date',
+                            history[index].date,
                             style: GoogleFonts.inter(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white),
-                          )
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              color: blackColor,
+                            ),
+                          ),
                         ],
                       )
                     ],
                   ),
-                  // Row(
-                  //   children: <Widget>[
-                  //     Text(
-                  //       'transactions[index].amount',
-                  //       style: GoogleFonts.inter(
-                  //           fontSize: 15,
-                  //           fontWeight: FontWeight.w700,
-                  //           color: Colors.black),
-                  //     )
-                  //   ],
-                  // )
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: pinkColor,
+                            ),
+                            child: Text(
+                              history[index].amount,
+                              style: GoogleFonts.inter(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: blueColor,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  )
                 ],
               ),
             );

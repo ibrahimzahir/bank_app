@@ -19,9 +19,27 @@ List<HistoryModel> history = historyData
 
 var historyData = [
   {
-    "name": "Grab ride",
-    "photo": "assets/images/uber_photo.png",
-    "date": "1st Apr 2020",
-    "amount": "-\$35.214"
+    "name": "Shein",
+    "photo": "assets/images/Shein-logo.jpeg",
+    "date": "01st Apr 2020",
+    "amount": "-\$351.00"
+  },
+  {
+    "name": "Revolve",
+    "photo": "assets/images/Revolve-logo.png",
+    "date": "11th Apr 2020",
+    "amount": "-\$73.24"
+  },
+  {
+    "name": "Note",
+    "photo": "assets/images/note-logo.png",
+    "date": "12th Apr 2020",
+    "amount": "-\$135.99"
+  },
+  {
+    "name": "Giorgio-Armani",
+    "photo": "assets/images/Giorgio-Armani.png",
+    "date": "14th Apr 2020",
+    "amount": "-\$375.99"
   },
 ];
